@@ -45,6 +45,11 @@ body{
 }
 .footer span{color:red;}
 @media(max-width:500px){ .card{padding:18px;} h1{font-size:20px;} }
+/* Dark Mode Styles */
+body.dark{--bg:#121212;--card-bg:#1e1e1e;--light:#333;color:white;}
+body.dark .card{background:#1e1e1e!important;color:white;}
+body.dark .btn-primary{background:#00a884!important;}
+body.dark #themeToggle{background:#00a884!important;}
 </style>
 </head>
 <body>
@@ -75,7 +80,16 @@ body{
 </div>
 <div class="footer">© 2023 Made with ❤️ by Atal 🇮🇳</div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- 🌗 Theme Toggle Button -->
+<button id="themeToggle" style="position:fixed;top:15px;right:15px;border:none;padding:8px 12px;border-radius:20px;background:var(--primary);color:white;cursor:pointer;font-size:14px;z-index:999;">🌙 Dark</button>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js">// 🌗 Theme Toggle Script
+$("#themeToggle").click(function(){
+ $('body').toggleClass('dark');
+ $(this).text($('body').hasClass('dark')?'☀ Light':'🌙 Dark');
+});
+</script>
 <script>
 $(document).ready(()=>{
  const input = $("#wanum");
