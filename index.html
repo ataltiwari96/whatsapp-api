@@ -56,10 +56,10 @@ body.dark #themeToggle{background:#00a884!important;}
 <div class="card-wrapper text-center">
 <img src="images/whatsapp-logo.png" width="80" class="mb-3"/>
 <div class="card">
-<h1>WhatsApp API by Atal</h1>
+<h1>WhatsApp On-The-Go</h1>
 <p>Send messages without saving contact. Enter number & start chatting instantly.</p>
 <div class="mb-3 d-flex">
-<select id="countryCode" class="custom-select" style="max-width:150px;border-radius:10px 0 0 10px;">
+<select id="countryCode" class="custom-select" style="max-width:95px;border-radius:10px 0 0 10px;">
 <option value="91">🇮🇳 +91</option>
 <option value="1">🇺🇸 +1</option>
 <option value="44">🇬🇧 +44</option>
@@ -89,6 +89,7 @@ $("#themeToggle").click(function(){
  $('body').toggleClass('dark');
  $(this).text($('body').hasClass('dark')?'☀ Light':'🌙 Dark');
 });
+document.getElementById('themeToggle').onclick=function(){document.body.classList.toggle('dark');this.textContent=document.body.classList.contains('dark')?'☀ Light':'🌙 Dark';};
 </script>
 <script>
 $(document).ready(()=>{
@@ -107,6 +108,14 @@ $(document).ready(()=>{
    if(input.val().length<10){alert("Enter valid phone number");return;}
    window.location=`https://wa.me/+${code.val()}${input.val()}`;
  });
+});
+</script>
+<script>
+// 🌗 Theme Toggle Fix
+const toggle=document.getElementById('themeToggle');
+toggle?.addEventListener('click',()=>{
+ document.body.classList.toggle('dark');
+ toggle.innerText=document.body.classList.contains('dark')?'☀ Light':'🌙 Dark';
 });
 </script>
 </body>
