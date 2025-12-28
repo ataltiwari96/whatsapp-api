@@ -1,63 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="author" content="Atal">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>WhatsApp API by Atal</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-  <link rel="shortcut icon" href="images/whatsapp-logo.png"/>
+<meta charset="utf-8">
+<meta name="author" content="Atal">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WhatsApp API by Atal</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="shortcut icon" href="images/whatsapp-logo.png"/>
+<style>
+:root{
+  --primary:#075e54;
+  --primary-dark:#064d42;
+  --light:#f0f0f0;
+  --bg:#e5ddd5;
+  --card-bg:white;
+}
+body{
+  background:var(--bg);
+  font-family:'Segoe UI',sans-serif;
+  display:flex;justify-content:center;align-items:center;
+  height:100vh;padding:10px;
+}
+.card-wrapper{
+  width:380px;max-width:95%;
+}
+.card{
+  border-radius:18px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.15);
+  border:none;padding:25px;
+  text-align:center;
+}
+.card h1{font-size:24px;font-weight:600;color:var(--primary);}
+.card p{color:#444;margin-bottom:18px;}
+#wanum{
+  border-radius:10px;border:1px solid #ccc;padding:12px;
+}
+.btn-primary{
+  background:var(--primary)!important;border:none;padding:12px 25px;
+  border-radius:25px;font-size:18px;transition:.3s;
+}
+.btn-primary:hover{background:var(--primary-dark)!important;transform:translateY(-2px);}
+.footer{
+  text-align:center;font-size:13px;margin-top:15px;color:#333;
+}
+.footer span{color:red;}
+@media(max-width:500px){ .card{padding:18px;} h1{font-size:20px;} }
+</style>
 </head>
+<body>
+<div class="card-wrapper text-center">
+<img src="images/whatsapp-logo.png" width="80" class="mb-3"/>
+<div class="card">
+<h1>WhatsApp API by Atal</h1>
+<p>Send messages without saving contact. Enter number & start chatting instantly.</p>
+<div class="mb-3 d-flex">
+<select id="countryCode" class="custom-select" style="max-width:150px;border-radius:10px 0 0 10px;">
+<option value="91">🇮🇳 +91</option>
+<option value="1">🇺🇸 +1</option>
+<option value="44">🇬🇧 +44</option>
+<option value="971">🇦🇪 +971</option>
+<option value="61">🇦🇺 +61</option>
+<option value="81">🇯🇵 +81</option>
+<option value="49">🇩🇪 +49</option>
+<option value="34">🇪🇸 +34</option>
+<option value="39">🇮🇹 +39</option>
+<option value="55">🇧🇷 +55</option>
+<option value="64">🇳🇿 +64</option>
+<option value="7">🇷🇺 +7</option>
+<option value="27">🇿🇦 +27</option>
+</select>
+<input type="tel" id="wanum" class="form-control" placeholder="Enter Phone Number" inputmode="numeric" pattern="[0-9]*" oninput="this.value=this.value.replace(/[^0-9]/g,'');" style="border-radius:0 10px 10px 0;">
+</div>
+<button id="myBtn" class="btn btn-primary btn-lg w-100">Start Chat →</button>
+</div>
+<div class="footer">© 2023 Made with ❤️ by Atal 🇮🇳</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(()=>{
+ const input = $("#wanum");
+ const btn = $("#myBtn");
+ const code = $("#countryCode");
 
-<body class="my-login-page">
-	<section class="h-100">
-		<div class="container h-100">
-			<div class="row justify-content-md-center h-100">
-				<div class="card-wrapper">
-					<div class="text-center">
-						<img src="images/whatsapp-logo.png" alt="logo" width="50%">
-					</div>
-					<div class="card fat">
-						<div class="text-center">
-							<h1>WhatsApp API by Atal</h1>
-              <p>Hola! You don't have to save contact of Unknowns when you can just WhatsApp them directly.</p>
-							<form method="POST" class="my-login-validation" novalidate="">
-								<div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">+91-</span>
-                  </div>
-                  <input type="Number" class="form-control" id="wanum" placeholder="Number" aria-label="Number" aria-describedby="basic-addon1">
-                </div>
+ input.on("input",()=>{
+   input.val(input.val().replace(/[^0-9]/g,''));
+   if(input.val().length>=10){btn.prop("disabled",false);}else btn.prop("disabled",true);
+ });
 
-                <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-                <script>
-                $(document).ready(function(){
-                    // Get value on button click and show alert
-                    $("#myBtn").click(function(){
-                        var str = "https://wa.me/+91"+$("#wanum").val();
-                        window.location=str;
-                    });
-                });
+ input.keypress(e=>{if(e.key === "Enter" && btn.prop("disabled")===false) btn.click();});
 
-              </script>
-								<div class="form-group m-0">
-									<a id="myBtn" class="btn btn-primary btn-lg active" role="button"  aria-pressed="true">Start Chat →</a>
-								</div>
-
-							</form>
-						</div>
-					</div>
-					<div class="footer">
-						Copyright &copy; 2023 &mdash; Made with ❤️ by Atal in 🇮🇳
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+ btn.click(()=>{
+   if(input.val().length<10){alert("Enter valid phone number");return;}
+   window.location=`https://wa.me/+${code.val()}${input.val()}`;
+ });
+});
+</script>
 </body>
 </html>
